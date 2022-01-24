@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.javaec.service.UserService;
+import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
 
 @Controller //컨트롤러가 다오를 직접쓰면 안됨
