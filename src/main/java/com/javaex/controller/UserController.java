@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.javaex.dao.UserDao;
+import com.javaec.service.UserService;
 import com.javaex.vo.UserVo;
 
-@Controller
+@Controller //컨트롤러가 다오를 직접쓰면 안됨
 public class UserController {
 	
-	@Autowired
-	private UserDao userDao;
+	@Autowired //다오를 쓰지 않고 서비스에 넘기고 서비스에서 다오를 실행해야됨
+	private UserService Userservice;
 
 	//로그인폼
 	@RequestMapping(value="/user/loginForm", method={RequestMethod.GET, RequestMethod.POST})
@@ -33,7 +33,7 @@ public class UserController {
 		
 		System.out.println(userVo);
 		
-		UserVo authUser = userDao.selectUser(userVo);
+		UserVo authUser = Userservice.login(userVo);
 		
 		System.out.println(authUser);
 		if(authUser != null) {
