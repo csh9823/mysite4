@@ -11,6 +11,16 @@ public class UserVo {
 	
 	//생성자
 	public UserVo() {}
+	
+	
+
+	public UserVo(String id, String password) {
+		
+		this.id = id;
+		this.password = password;
+	}
+
+
 
 	public UserVo(String id, String password, String name, String gender) {
 		this.id = id;

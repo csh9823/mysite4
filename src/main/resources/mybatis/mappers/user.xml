@@ -3,7 +3,7 @@
 
 <mapper namespace="user">
 
-    <select id="getUser" parameterType="com.javaex.vo.UserVo" resultType="com.javaex.vo.UserVo">
+    <select id="selectUser" parameterType="com.javaex.vo.UserVo" resultType="com.javaex.vo.UserVo">
     	<![CDATA[
     		select  no,
         			name
