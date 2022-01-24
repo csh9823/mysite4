@@ -42,11 +42,22 @@ public class UserController {
 			session.setAttribute("authUser", authUser); //  ("authUser" = jstl 꺼내쓸때 쓰는 이름 , authUser)세션에 값 넣어주기
 			return "redirect:/";
 		}else {
-			return "redirect:/";
+			System.out.println("로그인 실패");
+			return "redirect:/user/longinForm?result=fail";
 		}
 		 
 		
 	}
 	
+	@RequestMapping(value="/user/logout", method={RequestMethod.GET, RequestMethod.POST})
+	public String loginout(HttpSession session) {
+		
+		System.out.println("로그아웃");
+		session.removeAttribute("authUser"); //같이써줘야됨
+		session.invalidate(); //같이 써줘야됨 
+		
+		return "redirect:/";
+		
+	}
 	
 }
