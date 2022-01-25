@@ -38,12 +38,14 @@ public class BoardDao {
 		int count = sqlSession.insert("board.boardInsert", boardVo);
 		System.out.println("["+count+"건이 등록되었습니다]");
 	}
+	
 	//게시물 삭제
 	public void boardDelete(int num) {
 		System.out.println("[BoardDao.boardDelete()]");
 		int count = sqlSession.delete("board.boardDelete", num);
 		System.out.println("["+count+"건이 삭제되었습니다]");
 	}
+	
 	//게시물 수정
 	public void boardUpdate(BoardVo boardVo) {
 		System.out.println("[BoardDao.boardUpdate()]");
