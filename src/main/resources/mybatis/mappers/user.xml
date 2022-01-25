@@ -12,5 +12,35 @@
 			and password = #{password}
     	]]>
     </select>
-
+	
+	<select id="getUser" parameterType="int" resultType="UserVo">
+		<![CDATA[
+			select  no,
+			        id,
+			        password,
+			        name,
+			        gender
+			from    users
+			where   no=#{no}
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="UserVo">
+		<![CDATA[
+			insert into users
+			values (seq_users_no.nextval, #{id}, #{password}, #{name}, #{gender})
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="UserVo">
+		<![CDATA[
+			update users
+			set    id = #{id},
+       			   password = #{password},
+			       name = #{name},
+			       gender = #{gender} 
+			where  no = #{no}
+		]]>
+	</update>
+	
 </mapper>
