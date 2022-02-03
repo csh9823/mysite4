@@ -23,7 +23,10 @@ public class GuestbookDao {
 	}
 	
 	public int guestbookInsert(GuestbookVo guestbookVo) {
-		System.out.println("[GuestbookDao.guestbookInsert()");
+		
+		
+		System.out.println("[GuestbookDao.guestbookInsert()]");
+		System.out.println(guestbookVo);
 		
 		int count = sqlSession.insert("guestbook.guestbookInsert", guestbookVo);
 		
@@ -31,7 +34,16 @@ public class GuestbookDao {
 		
 		return count;
 	}
-
+	
+	
+	//방명록 글 삭제
+	public int delete(GuestbookVo guestbookVo){
+		System.out.println("guestbookDao/delete");
+			
+		return sqlSession.delete("guestbook.delete", guestbookVo);
+	}
+	
+	
 	public int guestbookDelete(int no, String password) {
 		System.out.println("[GuestbookDao.guestbookDelete()");
 		
@@ -43,4 +55,21 @@ public class GuestbookDao {
 		int count = sqlSession.delete("guestbook.guestbookDelete", guestMap);
 		return count;
 	}
+	
+	
+	//방명록 글 저장(selectKey)
+	public int insertSelectKey(GuestbookVo guestbookVo) {
+		System.out.println("dao/insertSelecKey");
+		System.out.println(guestbookVo);
+		sqlSession.insert("guestbook.insertSelectKey",guestbookVo);
+		return sqlSession.insert("guestbook.insertSelectKey",guestbookVo);
+		
+	}
+	
+	//방명록 글1개 가져오기
+	   public GuestbookVo selectGuest(int no) {
+	      System.out.println("guestbookDao/selectGuest");
+	      
+	      return sqlSession.selectOne("guestbook.selectByNo", no);
+	   }
 }

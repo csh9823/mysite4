@@ -25,6 +25,7 @@
 					<li>회원가입</li>
 				</ul>
 			</div>
+			
 			<!-- //aside -->
 
 			<div id="content">
@@ -66,7 +67,7 @@
 								<span class="form-text">성별</span>
 
 								<c:choose>
-									<c:when test="${sessionScope.userVo.gender == 'male'}">
+									<c:when test="${userVo.gender == 'male'}">
 										<label for="rdo-male">남</label>
 										<input type="radio" id="rdo-male" name="gender" value="male" checked="checked">
 										<label for="rdo-female">여</label>

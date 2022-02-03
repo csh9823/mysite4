@@ -9,13 +9,16 @@
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
 
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery-1.12.4.js"></script>
+
 </head>
 
 <body>
 	<div id="wrap">
 
-		<div id="header" class="clearfix">
 			<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+			
+			
 			<div id="container" class="clearfix">
 				<div id="aside">
 					<h2>회원</h2>
@@ -25,6 +28,7 @@
 						<li>회원가입</li>
 					</ul>
 				</div>
+				
 				<!-- //aside -->
 
 				<div id="content">
@@ -93,5 +97,25 @@
 	</div>
 	<!-- //wrap -->
 </body>
-
+<script type="text/javascript">
+	$("#btn-submit").on("click", function(){
+		console.log("회원가입버튼 클릭");
+		
+		var id = $("#input-uid").val();
+		var pw = $("#input-pass").val();
+		
+		
+		if(id == ""){
+			alert("아이디를 입력해 주세요");
+			return false;
+		}
+		if(pw == ""){
+			alert("비밀번호를 입력해 주세요");
+			return false;
+		}
+		
+		return true;
+		
+	});
+</script>
 </html>
