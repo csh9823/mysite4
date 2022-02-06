@@ -24,7 +24,6 @@
 			<c:import url="/WEB-INF/views/include/AsideGallery.jsp"></c:import>
 			<!-- //게시판 aside -->
 			
-			
 			<div id="content">
 		
 			<div id="content-head">
