@@ -4,6 +4,8 @@
 
 <mapper namespace="board">
 
+
+	<!-- 글리스트 가져오기 전체 -->
 	<select id="getList" parameterType="BoardVo" resultType="BoardVo">
 		<![CDATA[
 			select   us.name name,
@@ -19,6 +21,43 @@
 		]]>
 	</select>
 	
+	<!-- 글리스트 가져오기 페이징 -->
+	<select id="selectList2" parameterType="map" resultType="BoardVo">
+		<![CDATA[
+					select  rt.rn,
+							rt.no,
+        					rt.title,
+        					rt.content,
+        					rt.hit,
+        					rt.regdate,
+        					rt.userno,
+        					rt.name
+					from (select    rownum rn,
+									ot.no,
+        							ot.title,
+							        ot.content,
+        							ot.hit,
+        							ot.regdate,
+        							ot.userno,
+        							ot.name
+        					from (select    b.no,
+                        					b.title,
+					                        b.content,
+                    					    b.hit,
+                        					to_char(b.reg_date, 'YYYY-MM-DD HH:MI:SS') regDate,
+                        					b.user_no userNo,
+                        					u.name name
+                				  from board b, users u
+                				  where b.user_no = u.no
+                				  order by b.no desc) ot
+                				  )rt
+					where rn>=#{startRnum}
+					and rn<=#{endRnum}
+		]]>
+	</select>
+
+
+	<!-- 글 하나 가져오기 -->
 	<select id="getBoard" parameterType="int" resultType="BoardVo">
 		<![CDATA[
 			select   us.name name,
@@ -34,6 +73,8 @@
 		]]>
 	</select>
 	
+	
+	<!-- 조회수 -->
 	<update id="hitPlus" parameterType="int">
 		<![CDATA[
 			update  board
@@ -41,6 +82,8 @@
 			where   no = #{num}
 		]]>
 	</update>
+	
+	<!-- 수정 -->
 	<update id="boardUpdate" parameterType="BoardVo">
 		<![CDATA[
 			update board
@@ -49,17 +92,31 @@
 			where  no = #{no}
 		]]>
 	</update>
-	
+
+	<!-- 추가 -->
 	<insert id="boardInsert" parameterType="BoardVo">
 		<![CDATA[
 			insert into board
 			values (seq_board_no.nextval, #{title}, #{content}, 0, sysdate, #{userNo})
 		]]>
 	</insert>
-		<delete id="boardDelete" parameterType="int">
+	
+	<!-- 삭제 -->
+	<delete id="boardDelete" parameterType="int">
 		<![CDATA[
 			delete board
 			where no = #{num}
 		]]>
 	</delete>
+	
+	<!-- 전체 글 카운트 -->
+	
+	<select id="totalCnt" resultType="int">
+		<![CDATA[
+			select COUNT(*)
+			from board b, users u
+			where b.user_no = u.no
+		]]>
+	
+	</select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -33,16 +34,39 @@ public class BoardController {
 
 		return "/board/list";
 	}
-
+	
+	//리스트 페이징
+	@RequestMapping(value = "/list2", method = { RequestMethod.GET, RequestMethod.POST }) // value = "crtPage", required = false, defaultValue = "1" 파라미터 값이 없을경우 1페이지로 처리
+	public String list2(Model model, @RequestParam(value = "crtPage", required = false, defaultValue = "1") int crtPage) {
+		System.out.println("BoardController/list2()");
+		System.out.println(crtPage);
+		//해당글 리스트 10개
+		Map<String, Object> pMap = boardService.getList2(crtPage);
+		
+		System.out.println("-------BoardController----------");
+		System.out.println(pMap);
+		System.out.println("--------------------------------");
+		
+		model.addAttribute("pMap",pMap);
+		return "/board/list";
+	}
+	
+	//글쓰기
 	@RequestMapping(value = "/writeForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String writeForm(HttpSession session) {
+		
 		System.out.println("[BoardController.writeForm()");
+		
+		//로그인 세션
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		
+		//로그인 일때 글쓰기 허용
 		if (authUser != null) {
 			return "/board/writeForm";
 		} else {
 			return "redirect:/";
 		}
+		
 	}
 
 	@RequestMapping(value = "/write", method = { RequestMethod.GET, RequestMethod.POST })
